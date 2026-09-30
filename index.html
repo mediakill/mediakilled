@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>@mediakill — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070707;--panel:#0d0d0d;--panel2:#111;--line:rgba(255,255,255,.1);--muted:#858585;--text:#f4f4f4;--soft:#bdbdbd;--accent:#fff;--radius:24px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 0,rgba(255,255,255,.07),transparent 32%),radial-gradient(circle at 100% 40%,rgba(255,255,255,.035),transparent 30%);z-index:-2}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;z-index:-1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.wrap{width:min(1160px,calc(100% - 36px));margin:auto}
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 28px));height:62px;border:1px solid var(--line);background:rgba(8,8,8,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:18px;display:flex;align-items:center;justify-content:space-between;padding:0 17px;z-index:100;box-shadow:0 15px 50px rgba(0,0,0,.28)}
+.brand{font-family:"Space Grotesk";font-weight:700;letter-spacing:-.03em}
+.navlinks{display:flex;gap:4px}
+.navlinks a{font-size:12px;color:#999;padding:10px 12px;border-radius:11px;transition:.25s}
+.navlinks a:hover{background:#171717;color:#fff}
+.navbtn{display:none;background:#111;border:1px solid var(--line);color:#fff;border-radius:11px;padding:9px 11px}
+.hero{min-height:92vh;display:flex;align-items:center;padding-top:100px}
+.eyebrow{color:#777;font:600 11px "Space Grotesk";letter-spacing:.18em;text-transform:uppercase;margin-bottom:22px}
+h1{font:700 clamp(55px,10vw,125px)/.88 "Space Grotesk";letter-spacing:-.075em;max-width:920px}
+.hero p{max-width:690px;color:#9c9c9c;font-size:16px;line-height:1.75;margin:30px 0}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 17px;border:1px solid var(--line);border-radius:13px;background:#111;color:#eee;font-size:13px;transition:.3s;box-shadow:inset 0 1px rgba(255,255,255,.05)}
+.btn.primary{background:#f2f2f2;color:#090909;border-color:#f2f2f2}
+.btn:hover{transform:translateY(-3px);border-color:#444}
+.scroll{margin-top:80px;color:#666;font-size:10px;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:10px}.scroll i{width:35px;height:1px;background:#444}
+section{padding:105px 0}
+.section-head{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:42px}
+.kicker{color:#666;font:600 10px "Space Grotesk";letter-spacing:.17em;text-transform:uppercase;margin-bottom:12px}
+h2{font:600 clamp(36px,5vw,62px)/1 "Space Grotesk";letter-spacing:-.055em}
+.lead{max-width:500px;color:#858585;line-height:1.7;font-size:14px}
+.aboutgrid{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:var(--radius);padding:30px;position:relative;overflow:hidden;transition:.35s}
+.card:before{content:"";position:absolute;inset:-100% -50%;background:radial-gradient(circle,rgba(255,255,255,.07),transparent 25%);opacity:0;transition:.5s}
+.card:hover{transform:translateY(-5px);border-color:#292929}.card:hover:before{opacity:1}
+.bigtext{font-size:clamp(22px,3vw,35px);line-height:1.35;letter-spacing:-.035em;position:relative}
+.muted{color:#747474}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.stat{background:#0c0c0c;padding:24px}.stat b{display:block;font:600 30px "Space Grotesk";margin-bottom:7px}.stat span{font-size:11px;color:#666}
+.pricegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.pricecard{min-height:205px;display:flex;flex-direction:column;justify-content:space-between}
+.tag{font:600 10px "Space Grotesk";letter-spacing:.15em;color:#666;text-transform:uppercase}
+.pricecard h3{font:600 22px "Space Grotesk";letter-spacing:-.03em;margin:14px 0 8px}
+.price{font:600 25px "Space Grotesk";letter-spacing:-.04em}.desc{font-size:12px;line-height:1.6;color:#777;margin-top:8px}
+.note{margin-top:16px;padding:16px;border:1px dashed #292929;border-radius:14px;color:#777;font-size:11px;line-height:1.6}
+.project{display:grid;grid-template-columns:100px 1fr auto;gap:25px;align-items:start;border-top:1px solid var(--line);padding:30px 0;transition:.3s}.project:last-child{border-bottom:1px solid var(--line)}
+.project:hover{padding-left:12px;background:linear-gradient(90deg,rgba(255,255,255,.025),transparent)}
+.num{font:600 12px "Space Grotesk";color:#555}
+.project h3{font:600 27px "Space Grotesk";letter-spacing:-.04em;margin-bottom:9px}.handle{font-size:12px;color:#666}.project p{max-width:720px;color:#777;font-size:13px;line-height:1.7;margin-top:16px}
+.arrow{font-size:22px;color:#666}
+.botgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.bot h3{font:600 22px "Space Grotesk";letter-spacing:-.035em}.bot .handle{margin:7px 0 15px}.bot p{font-size:12px;line-height:1.65;color:#777}.bot a{display:inline-block;margin-top:20px;font-size:12px;border-bottom:1px solid #444;padding-bottom:3px}
+.payment{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid #242424;padding:9px 12px;border-radius:999px;color:#aaa;font-size:11px}
+.cta{padding:70px 0 110px}.cta .card{text-align:center;padding:75px 25px}.cta h2{font-size:clamp(45px,7vw,82px)}.cta p{max-width:540px;margin:20px auto 28px;color:#777;line-height:1.7;font-size:13px}
+footer{border-top:1px solid var(--line);padding:25px 0 35px;display:flex;justify-content:space-between;color:#555;font-size:11px}
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .8s ease,transform .8s ease}.reveal.show{opacity:1;transform:none}
+#top{position:fixed;right:22px;bottom:22px;width:43px;height:43px;border:1px solid #292929;background:#0d0d0ddd;color:#aaa;border-radius:13px;z-index:90;cursor:pointer;backdrop-filter:blur(10px);transition:.25s}#top:hover{color:#fff;transform:translateY(-3px)}
+@media(max-width:760px){
+ .wrap{width:min(100% - 26px,620px)}nav{height:58px}.navlinks{display:none;position:absolute;top:67px;left:0;right:0;padding:8px;background:#0b0b0bee;border:1px solid var(--line);border-radius:15px;flex-direction:column}.navlinks.open{display:flex}.navlinks a{padding:12px}
+ .navbtn{display:block}.hero{min-height:88vh}.hero p{font-size:14px}.scroll{margin-top:55px}section{padding:75px 0}.section-head{display:block}.lead{margin-top:18px}
+ .aboutgrid,.pricegrid,.botgrid{grid-template-columns:1fr}.project{grid-template-columns:45px 1fr}.arrow{display:none}.card{padding:24px}
+ footer{gap:15px;flex-direction:column}.cta .card{padding:55px 18px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="#top">@mediakill</a>
+  <div class="navlinks" id="navlinks">
+    <a href="#about">Обо мне</a><a href="#price">Мой прайс</a><a href="#projects">Проекты</a><a href="#bots">Боты</a><a href="#contact">Контакты</a>
+  </div>
+  <button class="navbtn" id="navbtn">☰</button>
+</nav>
+
+<main id="top">
+<section class="hero wrap">
+  <div class="reveal">
+    <div class="eyebrow">Telegram bots · projects · development</div>
+    <h1>🇬🇧<br>screaminghead</h1>
+    <p>Разработка Telegram-ботов, собственных проектов и цифровых решений.</p>
+    <div class="actions"><a class="btn primary" href="https://t.me/mediakill">Написать мне ↗</a><a class="btn" href="#projects">Смотреть проекты ↓</a></div>
+    <div class="scroll"><i></i> scroll to explore</div>
+  </div>
+</section>
+
+<section id="about">
+<div class="wrap">
+ <div class="section-head reveal"><div><div class="kicker">01 / profile</div><h2>Немного обо мне</h2></div><p class="lead">Коротко о направлении, проектах и том, чем я занимаюсь.</p></div>
+ <div class="aboutgrid">
+  <div class="card reveal"><div class="bigtext">Бывший OSINT специалист. Создаю Telegram-ботов, автоматизацию и собственные проекты. Основной фокус — функциональность, удобный интерфейс и необычные идеи.</div><div class="muted" style="margin-top:28px;font-size:12px">@mediakill</div></div>
+  <div class="stats reveal"><div class="stat"><b>05</b><span>Telegram-ботов</span></div><div class="stat"><b>02</b><span>собственных проекта</span></div></div>
+ </div>
+</div>
+</section>
+
+<section id="price">
+<div class="wrap">
+ <div class="section-head reveal"><div><div class="kicker">02 / services</div><h2>Мой прайс</h2></div><p class="lead">OSINT / DIGITAL SERVICES и другие цифровые услуги.</p></div>
+ <div class="pricegrid">
+  <div class="card pricecard reveal"><div><span class="tag">OSINT</span><h3>Базовый поиск</h3><div class="price">$5 / 200 грн</div><p class="desc">Поиск открытой информации по нику, username и другим общедоступным данным.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">OSINT</span><h3>Расширенный OSINT</h3><div class="price">$10 / 400 грн</div><p class="desc">Комплексный поиск по открытым источникам с сопоставлением найденной информации.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">GUNS.LOL — сайты на заказ</span><h3>Простой сайт</h3><div class="price">3$ / 70 UAH</div><p class="desc">Базовое оформление, текст и ссылки.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">GUNS.LOL — сайты на заказ</span><h3>Стандартный сайт</h3><div class="price">4$ / 100 UAH</div><p class="desc">Индивидуальный дизайн, оформление профиля, ссылки и дополнительные элементы.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">GUNS.LOL — сайты на заказ</span><h3>Премиум</h3><div class="price">8$ / 150 UAH</div><p class="desc">Полностью индивидуальное оформление с кастомным дизайном и дополнительными эффектами.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">АВАТАРКИ</span><h3>Простая аватарка</h3><div class="price">1$ / 120 UAH</div><p class="desc">Аватарка по вашему запросу и описанию.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">АВАТАРКИ</span><h3>Кастомная аватарка</h3><div class="price">2$ / 50 UAH</div><p class="desc">Индивидуальный дизайн с текстом, ником, тематикой и дополнительными элементами.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">OSINT EDITS</span><h3>Basic Edit</h3><div class="price">$5 / 200 грн</div><p class="desc">Короткий эдит в OSINT-тематике.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">OSINT EDITS</span><h3>Advanced Edit</h3><div class="price">$10 / 400 грн</div><p class="desc">Более сложный монтаж с эффектами, текстом, переходами и дополнительной обработкой.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">OSINT EDITS</span><h3>Premium Edit</h3><div class="price">$20 / 800 грн</div><p class="desc">Полностью индивидуальный эдит с продвинутым монтажом и большим количеством эффектов.</p></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">РЕДАКТИРОВАНИЕ ИЗОБРАЖЕНИЙ</span><h3>Базовая обработка</h3><div class="price">3$ / 120 UAH</div></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">РЕДАКТИРОВАНИЕ ИЗОБРАЖЕНИЙ</span><h3>Кастомная обработка</h3><div class="price">5$ / 200 UAH</div></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">РЕДАКТИРОВАНИЕ ИЗОБРАЖЕНИЙ</span><h3>Сложная обработка</h3><div class="price">от 10$ / 400 UAH</div></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">ГОТОВЫЕ МАТЕРИАЛЫ</span><h3>OSINT Pack</h3><div class="price">5$ / 200 UAH</div></div></div>
+  <div class="card pricecard reveal"><div><span class="tag">ГОТОВЫЕ МАТЕРИАЛЫ</span><h3>Private Pack</h3><div class="price">7$ / 300 UAH</div></div></div>
+ </div>
+ <div class="note reveal">«Работа проводится только с открытыми и законными источниками. Взлом, получение паролей и доступ к закрытым аккаунтам не входят.»<br><br>Оплата производится перед началом работы. Срок выполнения зависит от сложности заказа. Все OSINT-услуги выполняются только с использованием общедоступной информации и в рамках закона.</div>
+ <div class="payment reveal"><span class="pill">USD</span><span class="pill">UAH</span><span class="pill">crypto</span><span class="pill">bot</span></div>
+</div>
+</section>
+
+<section id="projects">
+<div class="wrap">
+ <div class="section-head reveal"><div><div class="kicker">03 / selected work</div><h2>Проекты</h2></div><p class="lead">Два проекта, которые сейчас представлены в портфолио.</p></div>
+ <div class="project reveal"><div class="num">01</div><div><h3>Темный Ворон</h3><div class="handle">@scamvoron</div><p>Проект, направленный на защиту мирных людей, которые не могут защитить себя самостоятельно. Обучаем основам OSINT и работе с информацией из открытых источников. Анализируем данные только из открытых источников и стараемся соблюдать правила Telegram и действующее законодательство. Проект не предназначен для шантажа или распространения закрытой информации.</p><a class="btn" style="margin-top:20px" href="https://t.me/scamvoron">Открыть канал ↗</a></div><div class="arrow">↗</div></div>
+ <div class="project reveal"><div class="num">02</div><div><h3>Лист британцев 🇬🇧</h3><div class="handle">@britancu</div><p>Создатель листа — @mediakilled.</p><a class="btn" style="margin-top:20px" href="https://t.me/britancu">Открыть канал ↗</a></div><div class="arrow">↗</div></div>
+</div>
+</section>
+
+<section id="bots">
+<div class="wrap">
+ <div class="section-head reveal"><div><div class="kicker">04 / telegram</div><h2>Боты</h2></div><p class="lead">Telegram-инструменты и проекты с прямым переходом к каждому боту.</p></div>
+ <div class="botgrid">
+  <div class="card bot reveal"><span class="tag">TGSEmoji · Telegram</span><h3>Emoji Maker</h3><div class="handle">@mediaEmoji_bot</div><p>Telegram-бот для создания собственных Telegram-эмодзи из анимированных TGS-шаблонов. Пользователь выбирает шаблон, задаёт текст и может создавать наборы эмодзи.</p><a href="https://t.me/mediaEmoji_bot">Открыть бота ↗</a></div>
+  <div class="card bot reveal"><span class="tag">Casino · Games</span><h3>Media Casino</h3><div class="handle">@walletMedia_bot</div><p>Telegram-казино с игровым балансом, бонусами, мини-играми и статистикой. Проект также связан с Mini App-интерфейсом.</p><a href="https://t.me/walletMedia_bot">Открыть бота ↗</a></div>
+  <div class="card bot reveal"><span class="tag">Biography · Profiles</span><h3>Biography</h3><div class="handle">@mediakill_robot</div><p>Telegram-бот для создания персональной биографии. Пользователь может оформить свою страницу и получить ссылку, по которой другие смогут посмотреть опубликованную биографию.</p><a href="https://t.me/mediakill_robot">Открыть бота ↗</a></div>
+  <div class="card bot reveal"><span class="tag">Search ID · Utility</span><h3>ID Finder</h3><div class="handle">@search_idRobot</div><p>Telegram-инструмент для поиска Telegram ID и получения информации, доступной через Telegram.</p><a href="https://t.me/search_idRobot">Открыть бота ↗</a></div>
+  <div class="card bot reveal"><span class="tag">Username · Search</span><h3>Search Username</h3><div class="handle">@mediaUsername_bot</div><p>Telegram-инструмент для поиска и проверки username, позволяющий быстро работать с Telegram-именами пользователей.</p><a href="https://t.me/mediaUsername_bot">Открыть бота ↗</a></div>
+ </div>
+</div>
+</section>
+
+<section class="cta" id="contact">
+<div class="wrap">
+ <div class="card reveal"><div class="kicker">05 / contact</div><h2>Есть идея?</h2><p>Связаться со мной можно напрямую в Telegram.</p><a class="btn primary" href="https://t.me/mediakill">@mediakill ↗</a></div>
+</div>
+</section>
+</main>
+
+<footer class="wrap"><span>© 2026 @mediakill</span><a href="https://t.me/mediakill">Telegram ↗</a></footer>
+<button id="top" aria-label="Наверх">↑</button>
+
+<script>
+const nav=document.getElementById('navlinks'),btn=document.getElementById('navbtn');
+btn.onclick=()=>nav.classList.toggle('open');
+document.querySelectorAll('.navlinks a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
+document.getElementById('top').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+</script>
+</body>
+</html>
