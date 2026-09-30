@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<title>MEDIAKILL — Archive</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+ --black:#0b0b0b;--white:#f2f1ed;--gray:#a09f9a;--dark:#161616;
+ --line:rgba(242,241,237,.15);--max:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+.wrap{width:min(var(--max),calc(100% - 44px));margin:auto}
+header{position:fixed;top:0;left:0;width:100%;height:76px;z-index:1000;mix-blend-mode:difference}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{font:700 13px "DM Mono";letter-spacing:-.04em}
+.logo span{color:#aaa}
+.navlinks{display:flex;gap:25px}
+.navlinks a{font:500 9px "DM Mono";letter-spacing:.1em;text-transform:uppercase;position:relative}
+.navlinks a:after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:white;transition:.3s}
+.navlinks a:hover:after{right:0}
+.menu{display:none;background:none;border:0;font-size:20px}
+
+.hero{height:100vh;min-height:700px;display:flex;align-items:flex-end;padding-bottom:60px;position:relative}
+.hero-top{position:absolute;top:115px;left:0;right:0;display:flex;justify-content:space-between;font:9px "DM Mono";color:#777;text-transform:uppercase;letter-spacing:.12em}
+.hero-title{font:700 clamp(82px,16vw,220px)/.72 "Space Grotesk";letter-spacing:-.105em;text-transform:uppercase}
+.hero-title div:nth-child(2){margin-left:11vw;color:transparent;-webkit-text-stroke:1px #777}
+.hero-title div:nth-child(3){margin-left:3vw}
+.hero-bottom{display:flex;justify-content:space-between;align-items:end;margin-top:65px}
+.hero-intro{width:340px;color:#888;font-size:12px;line-height:1.7}
+.hero-arrow{width:62px;height:62px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;transition:.3s}
+.hero-arrow:hover{background:var(--white);color:var(--black);transform:rotate(45deg)}
+
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);height:55px;overflow:hidden;display:flex;align-items:center;white-space:nowrap}
+.marquee-track{font:500 10px "DM Mono";letter-spacing:.16em;color:#666;animation:move 28s linear infinite}
+@keyframes move{to{transform:translateX(-50%)}}
+
+section{padding:150px 0}
+.section-index{font:500 10px "DM Mono";color:#666;margin-bottom:25px}
+.section-title{font:600 clamp(50px,9vw,125px)/.82 "Space Grotesk";letter-spacing:-.085em}
+.section-title em{font-style:normal;color:#666}
+.section-lead{max-width:390px;margin:30px 0 65px;color:#777;font-size:12px;line-height:1.8}
+
+.archive-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.archive-card{position:relative;overflow:hidden;background:#151515;min-height:440px;transition:.5s}
+.archive-card.large{grid-column:span 7}.archive-card.small{grid-column:span 5}
+.archive-card:nth-child(3){grid-column:span 5;min-height:360px}.archive-card:nth-child(4){grid-column:span 7;min-height:360px}
+.fake-image{position:absolute;inset:0;background:
+ radial-gradient(circle at 70% 35%,rgba(255,255,255,.16),transparent 25%),
+ linear-gradient(135deg,#181818,#080808 55%,#242424);
+ transition:transform .8s cubic-bezier(.2,.7,.2,1);filter:grayscale(1)}
+.archive-card:nth-child(2) .fake-image{background:radial-gradient(ellipse at 30% 70%,#555,transparent 25%),linear-gradient(115deg,#0b0b0b,#303030)}
+.archive-card:nth-child(3) .fake-image{background:radial-gradient(circle at 50% 45%,#777,transparent 15%),linear-gradient(45deg,#050505,#2a2a2a)}
+.archive-card:nth-child(4) .fake-image{background:linear-gradient(160deg,#303030,#090909 60%),repeating-linear-gradient(90deg,transparent 0 30px,rgba(255,255,255,.04) 31px 32px)}
+.archive-card:hover .fake-image{transform:scale(1.08)}
+.archive-card:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(0,0,0,.8))}
+.card-content{position:absolute;z-index:2;left:25px;right:25px;bottom:23px;display:flex;justify-content:space-between;align-items:end}
+.card-number{font:9px "DM Mono";color:#aaa}
+.card-name{font:600 clamp(25px,3vw,44px) "Space Grotesk";letter-spacing:-.05em}
+.card-tag{font:9px "DM Mono";color:#aaa;text-transform:uppercase;margin-top:5px}
+.card-arrow{width:35px;height:35px;border:1px solid #777;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+.horizontal{overflow:hidden;margin-left:calc((100vw - min(var(--max),calc(100vw - 44px)))/-2);margin-right:calc((100vw - min(var(--max),calc(100vw - 44px)))/-2);padding-left:max(22px,calc((100vw - min(var(--max),calc(100vw - 44px)))/2));}
+.horizontal-track{display:flex;width:max-content;gap:1px;background:var(--line)}
+.service{width:310px;height:390px;background:var(--black);padding:27px;display:flex;flex-direction:column;justify-content:space-between;transition:.4s}
+.service:hover{background:#171717}
+.service-no{font:9px "DM Mono";color:#555}
+.service h3{font:600 35px "Space Grotesk";letter-spacing:-.06em;line-height:.95}
+.service p{font-size:10px;color:#777;line-height:1.7;margin-top:15px}
+.service-price{font:500 10px "DM Mono";color:#aaa;border-top:1px solid var(--line);padding-top:14px}
+
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+.about-big{font:500 clamp(25px,4vw,55px)/1.05 "Space Grotesk";letter-spacing:-.055em}
+.about-copy{font-size:12px;line-height:1.9;color:#777}
+.about-copy p+p{margin-top:20px}
+.stats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:60px}
+.stat{padding:22px 0;border-bottom:1px solid var(--line)}
+.stat:nth-child(odd){border-right:1px solid var(--line);padding-right:20px}.stat:nth-child(even){padding-left:20px}
+.stat b{display:block;font:600 45px "Space Grotesk";letter-spacing:-.07em}.stat span{font:9px "DM Mono";color:#555}
+
+.price-table{border-top:1px solid var(--line)}
+.price-row{display:grid;grid-template-columns:70px 1fr 160px;gap:20px;padding:25px 0;border-bottom:1px solid var(--line);align-items:center;transition:.3s}
+.price-row:hover{padding-left:12px;background:linear-gradient(90deg,rgba(255,255,255,.035),transparent)}
+.price-no{font:9px "DM Mono";color:#555}.price-name{font-size:17px;font-weight:600}.price-desc{font-size:10px;color:#666;margin-top:5px}.price-cost{text-align:right;font:500 11px "DM Mono";color:#aaa}
+.disclaimer{margin-top:25px;border-left:1px solid #555;padding-left:15px;color:#666;font:9px/1.8 "DM Mono";max-width:700px}
+
+.contact{min-height:80vh;display:flex;align-items:center}
+.contact-inner{width:100%;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:80px 0;display:flex;justify-content:space-between;align-items:end;gap:30px}
+.contact h2{font:600 clamp(65px,12vw,165px)/.75 "Space Grotesk";letter-spacing:-.095em}
+.contact h2 span{display:block;color:#666}
+.contact-right{max-width:270px}.contact-right p{font-size:11px;line-height:1.8;color:#777;margin-bottom:22px}
+.contact-btn{display:inline-flex;padding:14px 17px;border:1px solid #444;font:500 10px "DM Mono";transition:.3s}
+.contact-btn:hover{background:var(--white);color:var(--black)}
+
+footer{border-top:1px solid var(--line);padding:25px 0 35px;display:flex;justify-content:space-between;color:#555;font:9px "DM Mono"}
+
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .8s,transform .8s}.reveal.show{opacity:1;transform:none}
+
+#loader{position:fixed;inset:0;background:#0b0b0b;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .8s,visibility .8s}
+#loader.hide{opacity:0;visibility:hidden}
+.loader-text{font:500 10px "DM Mono";letter-spacing:.16em;color:#777}.loader-text span{color:white}
+
+@media(max-width:800px){
+ .wrap{width:calc(100% - 26px)}
+ header{height:62px}.navlinks{display:none}.menu{display:block}.navlinks.open{display:flex;position:absolute;top:62px;left:0;right:0;background:#0b0b0b;border-bottom:1px solid var(--line);padding:18px;flex-direction:column;gap:20px}
+ .hero{min-height:760px;padding-bottom:35px}.hero-top{top:90px}.hero-title{font-size:clamp(65px,19vw,110px)}.hero-title div:nth-child(2){margin-left:7vw}
+ .hero-bottom{margin-top:45px}.hero-intro{width:260px}.hero-arrow{width:50px;height:50px}
+ section{padding:90px 0}.section-lead{margin-bottom:40px}
+ .archive-grid{display:grid;grid-template-columns:1fr 1fr}.archive-card,.archive-card.large,.archive-card.small,.archive-card:nth-child(3),.archive-card:nth-child(4){grid-column:span 2;min-height:330px}
+ .archive-card:nth-child(3),.archive-card:nth-child(4){min-height:270px}
+ .about-layout{grid-template-columns:1fr;gap:40px}.stats{margin-top:40px}
+ .price-row{grid-template-columns:38px 1fr 95px}.price-cost{font-size:9px}
+ .contact-inner{display:block;padding:65px 0}.contact-right{margin-top:40px}
+ .horizontal{margin-left:-13px;margin-right:-13px;padding-left:13px}
+}
+</style>
+</head>
+<body>
+
+<div id="loader"><div class="loader-text">LOADING <span>MEDIAKILL / ARCHIVE</span> <b>— 2026</b></div></div>
+
+<header>
+<div class="wrap nav">
+<a class="logo" href="#top">MEDIAKILL <span>/ ARCHIVE</span></a>
+<nav class="navlinks" id="nav">
+<a href="#work">Work</a><a href="#services">Services</a><a href="#about">About</a><a href="#price">Price</a><a href="#contact">Contact</a>
+</nav>
+<button class="menu" id="menu">☰</button>
+</div>
+</header>
+
+<main id="top">
+
+<section class="hero wrap">
+<div class="hero-top"><span>Digital creator / Ukraine</span><span>Vol. 01 — 2026</span></div>
+<div style="width:100%">
+<div class="hero-title reveal">
+<div>MEDIA</div><div>KILL</div><div>ARCHIVE</div>
+</div>
+<div class="hero-bottom reveal">
+<p class="hero-intro">Личный digital-архив @mediakill. Telegram-проекты, боты, сайты, визуал и цифровые услуги — собранные в одном пространстве.</p>
+<a class="hero-arrow" href="#work">↓</a>
+</div>
+</div>
+</section>
+
+<div class="marquee"><div class="marquee-track">MEDIAKILL — DIGITAL CREATOR — TELEGRAM — PROJECTS — OSINT — VISUAL — GUNS.LOL — MEDIAKILL — DIGITAL CREATOR — TELEGRAM — PROJECTS — OSINT — VISUAL — GUNS.LOL — </div></div>
+
+<section id="work">
+<div class="wrap">
+<div class="section-index reveal">01 / SELECTED WORK</div>
+<h2 class="section-title reveal">THE<br><em>ARCHIVE.</em></h2>
+<p class="section-lead reveal">Два проекта из твоего портфолио. Никаких обычных карточек — только крупные визуальные блоки.</p>
+<div class="archive-grid">
+<a class="archive-card large reveal" href="https://t.me/scamvoron"><div class="fake-image"></div><div class="card-content"><div><div class="card-number">01 / PROJECT</div><div class="card-name">Темный Ворон</div><div class="card-tag">@scamvoron</div></div><div class="card-arrow">↗</div></div></a>
+<a class="archive-card small reveal" href="https://t.me/britancu"><div class="fake-image"></div><div class="card-content"><div><div class="card-number">02 / PROJECT</div><div class="card-name">Лист британцев 🇬🇧</div><div class="card-tag">@britancu</div></div><div class="card-arrow">↗</div></div></a>
+<a class="archive-card small reveal" href="https://t.me/mediakill_robot"><div class="fake-image"></div><div class="card-content"><div><div class="card-number">03 / BOT</div><div class="card-name">Biography</div><div class="card-tag">@mediakill_robot</div></div><div class="card-arrow">↗</div></div></a>
+<a class="archive-card large reveal" href="https://t.me/mediaEmoji_bot"><div class="fake-image"></div><div class="card-content"><div><div class="card-number">04 / BOT</div><div class="card-name">Emoji Maker</div><div class="card-tag">@mediaEmoji_bot</div></div><div class="card-arrow">↗</div></div></a>
+</div>
+</div>
+</section>
+
+<section id="services">
+<div class="wrap">
+<div class="section-index reveal">02 / SERVICES</div>
+<h2 class="section-title reveal">WHAT<br><em>I MAKE.</em></h2>
+<p class="section-lead reveal">Основные направления работы. Лента прокручивается горизонтально и работает как каталог.</p>
+</div>
+<div class="horizontal">
+<div class="horizontal-track">
+<div class="service"><div class="service-no">01</div><div><h3>OSINT</h3><p>Поиск открытой информации по нику, username и другим общедоступным данным. Только открытые и законные источники.</p></div><div class="service-price">FROM $5</div></div>
+<div class="service"><div class="service-no">02</div><div><h3>GUNS.LOL</h3><p>Простые, стандартные и премиальные сайты с индивидуальным оформлением.</p></div><div class="service-price">FROM $3</div></div>
+<div class="service"><div class="service-no">03</div><div><h3>AVATARS</h3><p>Простые и кастомные аватарки с текстом, ником, тематикой и дополнительными элементами.</p></div><div class="service-price">FROM $1</div></div>
+<div class="service"><div class="service-no">04</div><div><h3>EDITS</h3><p>Basic, Advanced и Premium эдиты с эффектами, текстом, переходами и обработкой.</p></div><div class="service-price">FROM $5</div></div>
+<div class="service"><div class="service-no">05</div><div><h3>IMAGE</h3><p>Базовая, кастомная и сложная обработка изображений.</p></div><div class="service-price">FROM $3</div></div>
+<div class="service"><div class="service-no">06</div><div><h3>PACKS</h3><p>Готовые материалы: OSINT Pack и Private Pack.</p></div><div class="service-price">FROM $5</div></div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="wrap">
+<div class="section-index reveal">03 / PROFILE</div>
+<div class="about-layout">
+<div class="about-big reveal">Бывший OSINT специалист. Создаю Telegram-ботов, автоматизацию и собственные проекты. Основной фокус — функциональность, удобный интерфейс и необычные идеи.</div>
+<div class="about-copy reveal">
+<p>Это не агентство и не команда. Это личный digital-профиль, где собраны мои проекты и услуги.</p>
+<p>Основные направления — Telegram, сайты, визуал и работа с открытой информацией.</p>
+<div class="stats">
+<div class="stat"><b>05</b><span>TELEGRAM BOTS</span></div>
+<div class="stat"><b>02</b><span>PROJECTS</span></div>
+<div class="stat"><b>06+</b><span>SERVICES</span></div>
+<div class="stat"><b>2026</b><span>ARCHIVE</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="price">
+<div class="wrap">
+<div class="section-index reveal">04 / PRICE</div>
+<h2 class="section-title reveal">THE<br><em>PRICE.</em></h2>
+<p class="section-lead reveal">Актуальные позиции из твоего прайса.</p>
+<div class="price-table">
+<div class="price-row reveal"><span class="price-no">01</span><div><div class="price-name">Базовый OSINT</div><div class="price-desc">Поиск открытой информации</div></div><span class="price-cost">$5 / 200 грн</span></div>
+<div class="price-row reveal"><span class="price-no">02</span><div><div class="price-name">Расширенный OSINT</div><div class="price-desc">Комплексный поиск и сопоставление</div></div><span class="price-cost">$10 / 400 грн</span></div>
+<div class="price-row reveal"><span class="price-no">03</span><div><div class="price-name">GUNS.LOL — Простой</div><div class="price-desc">Базовое оформление, текст и ссылки</div></div><span class="price-cost">3$ / 70 UAH</span></div>
+<div class="price-row reveal"><span class="price-no">04</span><div><div class="price-name">GUNS.LOL — Стандарт</div><div class="price-desc">Индивидуальный дизайн и дополнительные элементы</div></div><span class="price-cost">4$ / 100 UAH</span></div>
+<div class="price-row reveal"><span class="price-no">05</span><div><div class="price-name">GUNS.LOL — Премиум</div><div class="price-desc">Полностью индивидуальное оформление</div></div><span class="price-cost">8$ / 150 UAH</span></div>
+<div class="price-row reveal"><span class="price-no">06</span><div><div class="price-name">Аватарки</div><div class="price-desc">Простая / кастомная</div></div><span class="price-cost">от 1$</span></div>
+<div class="price-row reveal"><span class="price-no">07</span><div><div class="price-name">OSINT Edits</div><div class="price-desc">Basic / Advanced / Premium</div></div><span class="price-cost">от $5</span></div>
+<div class="price-row reveal"><span class="price-no">08</span><div><div class="price-name">Редактирование изображений</div><div class="price-desc">Базовая / кастомная / сложная обработка</div></div><span class="price-cost">от 3$</span></div>
+<div class="price-row reveal"><span class="price-no">09</span><div><div class="price-name">Готовые материалы</div><div class="price-desc">OSINT Pack / Private Pack</div></div><span class="price-cost">от 5$</span></div>
+</div>
+<div class="disclaimer reveal">РАБОТА ПРОВОДИТСЯ ТОЛЬКО С ОТКРЫТЫМИ И ЗАКОННЫМИ ИСТОЧНИКАМИ. ВЗЛОМ, ПОЛУЧЕНИЕ ПАРОЛЕЙ И ДОСТУП К ЗАКРЫТЫМ АККАУНТАМ НЕ ВХОДЯТ.</div>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="wrap">
+<div class="contact-inner reveal">
+<div><h2>LET'S<br><span>MAKE.</span></h2></div>
+<div class="contact-right"><p>Есть идея, нужен бот, сайт, визуал или другая цифровая услуга? Напиши напрямую.</p><a class="contact-btn" href="https://t.me/mediakill">CONTACT @MEDIAKILL ↗</a></div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="wrap"><span>© 2026 MEDIAKILL / ARCHIVE</span><a href="https://t.me/mediakill">@MEDIAKILL ↗</a></footer>
+
+<script>
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('hide'),550));
+const menu=document.getElementById('menu'),nav=document.getElementById('nav');
+menu.onclick=()=>nav.classList.toggle('open');
+document.querySelectorAll('.navlinks a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
+</script>
+</body>
+</html>
